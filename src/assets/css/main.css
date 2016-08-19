@@ -1,0 +1,89 @@
+html {
+  min-height:100vh;
+}
+
+body {
+  background-color: #eee;
+  display: flex;
+  flex-direction: column;
+  font-family: Helvetica, Arial, sans-serif;
+  margin: 0;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+  text-align: center;
+}
+
+.chart {
+  /*background: #ffe;*/
+  /*height: 500px;*/
+  margin: 50px auto;
+  /*padding: 1em;*/
+  position: relative;
+  /*width: 915px;*/
+}
+
+header {
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+}
+
+header span {
+  display: block;
+  margin: .25em 0;
+}
+
+h1 {
+  font-size: 2.25rem;
+}
+
+.sub-title {
+  font-size: .75em;
+}
+
+.extra {
+  font-size: .6em;
+}
+
+svg {
+  background: #ffe;
+  padding: 1em;
+}
+
+.axis {
+  font: 10px sans-serif;
+}
+
+.x-axis path,
+.y-axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  /*stroke-width: 1px;*/
+  shape-rendering: crispEdges;
+}
+
+footer {
+  background-color: #333;
+  color: #ffe;
+  padding: 25px 0;
+  width: 100%;
+}
+
+footer span {
+  margin-left: 15px;
+}
+
+footer a {
+  color: #ffe;
+  text-decoration: none;
+}
+
+footer a:hover {
+  color: #2098d1;
+}

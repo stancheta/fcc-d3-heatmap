@@ -12,36 +12,27 @@
 		<!-- endinject -->
 	</head>
 	<body>
-		<div class="container">
-			<div class="jumbotron">
-				<h1>boilerplate with Gulp and Bootstrap</h1>
-				<p>To get you started the files that are built through gulp follow this organization:</p>
-				<pre>
-					boilerplate-gulp-bootstrap
-					| -- assets/
-					|    | -- css/
-					|    |    | -- normalize.css
-					|    |    | -- bootstrap.css
-					|    |    | -- bootstrap-theme.css
-					|    |    | -- font-awesome.css
-					|    |    | -- project-specific css
-					|    | -- fonts/
-					|    |    | -- any bootstrap fonts
-					|    |    | -- any font-awesome fonts
-					|    |    | -- project-specific fonts
-					|    | -- js/
-					|    |    | -- jquery.js
-					|    |    | -- bootstrap.js
-					|    |    | -- project-specific js
-					| -- favicon.ico
-					| -- index.html
-				</pre>
-				<p>where vendor assets are injected before project specific assets.</p>
+		<main>
+			<div class="chart">
+				<header>
+					<h1>
+						Monthly Global Land-Surface Temperature
+						<span class="sub-title">1753 - 2015</span>
+						<!-- <span class="extra">Normalized to 13.8km distance</span> -->
+					</h1>
+				</header>
 			</div>
-		</div>
+		</main>
+		<footer>
+			<span class="name">
+				Created by
+				<a href="https://steventancheta.com">Steven T Ancheta</a>
+			</span>
+		</footer>
 	</body>
 		<!-- vendor:js -->
 		<!-- endinject -->
+		<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
 		<!-- main:js -->
 		<!-- endinject -->
 </html>
