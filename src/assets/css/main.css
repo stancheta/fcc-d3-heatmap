@@ -25,6 +25,10 @@ main {
   /*width: 915px;*/
 }
 
+.chart .bin:hover {
+  fill: #8B7500 !important;
+}
+
 header {
   position: absolute;
   margin-left: auto;
@@ -39,7 +43,7 @@ header span {
 }
 
 h1 {
-  font-size: 2.25rem;
+  font-size: 2.5rem;
 }
 
 .sub-title {
@@ -47,7 +51,8 @@ h1 {
 }
 
 .extra {
-  font-size: .6em;
+  color: #777;
+  font-size: .45em;
 }
 
 svg {
@@ -66,6 +71,16 @@ svg {
   stroke: #000;
   /*stroke-width: 1px;*/
   shape-rendering: crispEdges;
+}
+
+.tooltip {
+  background: #333;
+  color: #eee;
+  border-radius: 2px;
+  font-size: 14px;
+  padding: 5px 10px;
+  position: absolute;
+  text-align: center;
 }
 
 footer {
