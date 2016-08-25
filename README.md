@@ -41,6 +41,6 @@ This project uses D3.js to display a heatmap visualizing the monthly global land
 + Node
 
 ### Live Demo
-Coming Soon!
+[http://codepen.io/stancheta/full/ZOdXwX/](http://codepen.io/stancheta/full/ZOdXwX/)
 
 ---
