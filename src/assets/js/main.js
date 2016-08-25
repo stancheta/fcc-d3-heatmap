@@ -43,18 +43,34 @@
       d.variance = +d.variance;
     });
 
-    var maxYear = d3.max(mVariance, function(d) { return d.year; });
     var minYear = d3.min(mVariance, function(d) { return d.year; });
+    var maxYear = d3.max(mVariance, function(d) { return d.year; });
+    var minDate = new Date(minYear, 0);
+    var maxDate = new Date(maxYear, 0);
     var maxVariance = d3.max(mVariance, function(d) { return d.variance; });
     var minVariance = d3.min(mVariance, function(d) { return d.variance; });
 
     var color = d3.scale.linear().domain([0, 6, 11]).range(['#6996AD', '#FFF68F', '#660000']);
     var colorScale = d3.scale.linear().domain([minVariance + baseTemp, maxVariance + baseTemp]).range([0,11]);
+    var roundTen = function(num) { return Math.floor(num * 10) / 10};
     var roundThousand = function(num) { return Math.floor(num * 1000) / 1000};
     var months = ['January', 'February', 'March', 'April', 'May', 'June',
                   'July', 'August', 'September', 'October', 'November', 'December'];
-    var x = d3.scale.linear().domain([minYear, maxYear]).range([0, width / 1.3]);
-    var y = d3.scale.linear().domain([11, 0]).range([height - margin.bottom, 0]);
+
+    var x = d3.time.scale().domain([minDate, maxDate]).range([0, width]);
+    var y = d3.scale.linear().domain([11, 0]).range([height - (margin.bottom + 50), 0]);
+
+    var yAxis = d3.svg.axis()
+                  .scale(y)
+                  .orient('left')
+                  .innerTickSize(0)
+                  .outerTickSize(0)
+                  .tickFormat(function(d) { return months[d]; });
+
+    var xAxis = d3.svg.axis()
+                  .scale(x)
+                  .orient('bottom')
+                  .ticks(d3.time.years, 10);
 
     var tooltip = d3.select('.chart')
                 .append('div')
@@ -65,11 +81,10 @@
                     .data(mVariance)
                     .enter().append('rect')
                     .attr('class', 'bin')
-                    .attr('x', function(d) { return (x(d.year) + ((d.year - minYear) + 1)); })
+                    .attr('x', function(d) { return (x(new Date(d.year, 0))); })
                     .attr('y', function(d) { return y((d.month - 1)); })
-                    // .attr("transform", function(d, i) { return "translate(" + i * 5 + ", 0)"; })
                     .attr('width', 3)
-                    .attr('height', 45)
+                    .attr('height', 40)
                     .style('fill', function(d) { return color(colorScale(d.variance + baseTemp)); })
                     .on('mouseover', function(d) {
                        tooltip.transition()
@@ -82,34 +97,56 @@
                         )
                         .style('left', (d3.event.pageX + 20) + 'px')
                         .style('top', (d3.event.pageY - 20) + 'px');
+                    })
+                    .on('mouseout', function() {
+                      tooltip.transition()
+                             .duration(200)
+                             .style('opacity', 0);
+                    });
 
-                     })
-                     .on('mouseout', function() {
-                       tooltip.transition()
-                              .duration(200)
-                              .style('opacity', 0);
-                     });
+    svg.append('g')
+        .attr('class', 'y-axis')
+        .attr('transform', 'translate(' + 0 + ',' + 20 + ')')
+        .call(yAxis)
+        .append('text')
+        .attr('transform', 'rotate(-90)')
+        .attr('x', -225)
+        .attr('y', -100)
+        .attr('dy', '.71em')
+        .style('text-anchor', 'middle')
+        .style('font-weight', 'bold')
+        .text('months');
+
+    svg.append('g')
+       .attr('class', 'x-axis')
+       .attr('transform', 'translate(0,' + (height - 80) + ')')
+       .call(xAxis)
+       .append('text')
+       .attr('x', width / 2)
+       .attr('y', 45)
+       .attr('dy', '.71em')
+       .style('text-anchor', 'middle')
+       .style('font-weight', 'bold')
+       .text('years');
 
     var legend = svg.selectAll('.legend')
                 .data(color)
                 .enter().append('g')
                 .attr('class', 'legend')
-                .attr("transform", function(d, i) { return "translate(" + i * 30 + ", 0)"; });
+                .attr("transform", function(d, i) { return "translate(" + i * 40 + ", 0)"; });
 
     legend.append("rect")
-          .attr("x", width - 290)
-          .attr("y", height + 10)
-          .attr("width", 30)
+          .attr("x", width - 400)
+          .attr("y", height - 15)
+          .attr("width", 40)
           .attr("height", 15)
           .style("fill", function(d, i) { return color(i); });
 
     legend.append("text")
-        .attr("x", width - 175)
-        .attr("y", 5)
-        .attr("dy", ".35em")
-        .style("text-anchor", "end")
-        .text(function(d, i) { return colorScale[i]; });
-    console.log(data);
+        .attr("x", width - 380)
+        .attr("y", height + 15)
+        .style("text-anchor", "middle")
+        .text(function(d, i) { return roundTen((maxVariance + baseTemp) * i * 0.1); });
   };
 
   // setup

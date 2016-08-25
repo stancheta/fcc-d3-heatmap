@@ -65,12 +65,24 @@ svg {
 }
 
 .x-axis path,
-.y-axis path,
+.x-axis .tick,
 .axis line {
   fill: none;
   stroke: #000;
-  /*stroke-width: 1px;*/
   shape-rendering: crispEdges;
+}
+
+.x-axis .tick text {
+  fill: #000;
+  stroke: none;
+}
+
+.y-axis .tick {
+  font-size: 1em;
+}
+
+.y-axis path {
+  stroke-width: 0;
 }
 
 .tooltip {
